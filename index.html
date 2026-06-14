@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kuraz Collective Inc.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── TOKENS ─────────────────────────────────── */
+    :root {
+      --blue:        #7FA8C9;
+      --blue-deep:   #4F7A9E;
+      --blue-pale:   #C9DCEA;
+      --blue-wash:   #EEF5FA;
+      --ink:         #1C2B38;
+      --mist:        #6B8899;
+      --white:       #FFFFFF;
+      --cream:       #F7FAFB;
+
+      --serif:  'Cormorant Garamond', Georgia, serif;
+      --sans:   'DM Sans', system-ui, sans-serif;
+
+      --max: 1080px;
+      --section-gap: 100px;
+    }
+
+    /* ─── RESET ──────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--white);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── NAV ────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--blue-pale);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-logo img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+    }
+    .nav-wordmark {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--blue-deep);
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+    }
+    .nav-wordmark span {
+      display: block;
+      font-weight: 400;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mist);
+      font-family: var(--sans);
+    }
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mist);
+    }
+    .nav-links a:hover { color: var(--blue-deep); }
+    .nav-cta {
+      background: var(--blue);
+      color: var(--white) !important;
+      padding: 9px 22px;
+      border-radius: 40px;
+      letter-spacing: 0.05em;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--blue-deep) !important; }
+
+    /* ─── HERO ───────────────────────────────────── */
+    /* Signature element: a soft radial lantern-glow behind the logo */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 140px 48px 80px;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -52%);
+      width: 560px; height: 560px;
+      background: radial-gradient(ellipse at center,
+        rgba(127,168,201,0.22) 0%,
+        rgba(127,168,201,0.06) 55%,
+        transparent 75%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-logo {
+      width: 140px;
+      margin: 0 auto 36px;
+      position: relative;
+    }
+    .hero-eyebrow {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+      font-weight: 600;
+      line-height: 1.12;
+      color: var(--ink);
+      max-width: 780px;
+      margin: 0 auto 24px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--blue-deep);
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--mist);
+      max-width: 560px;
+      margin: 0 auto 42px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      border-radius: 40px;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--blue-deep);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: var(--ink); }
+    .btn-outline {
+      border: 1.5px solid var(--blue);
+      color: var(--blue-deep);
+    }
+    .btn-outline:hover { background: var(--blue-wash); }
+
+    /* ─── SCROLL ANCHOR ──────────────────────────── */
+    .scroll-hint {
+      margin-top: 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--blue-pale);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .scroll-hint svg { animation: bounce 2s ease-in-out infinite; }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(6px); }
+    }
+
+    /* ─── SECTION WRAPPER ────────────────────────── */
+    .section {
+      padding: var(--section-gap) 48px;
+    }
+    .section-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    /* ─── ABOUT ──────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .about-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 18px;
+    }
+    .about-left h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 2.9rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 28px;
+    }
+    .about-left p {
+      font-size: 0.97rem;
+      line-height: 1.8;
+      color: var(--mist);
+      margin-bottom: 18px;
+    }
+    .mission-card {
+      background: var(--blue-wash);
+      border-left: 3px solid var(--blue);
+      padding: 28px 30px;
+      border-radius: 0 12px 12px 0;
+    }
+    .mission-card h3 {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--blue-deep);
+      margin-bottom: 10px;
+      letter-spacing: 0.01em;
+    }
+    .mission-card p {
+      font-size: 0.93rem;
+      line-height: 1.75;
+      color: var(--mist);
+    }
+    .why-list {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .why-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 0.93rem;
+      line-height: 1.6;
+      color: var(--mist);
+    }
+    .why-dot {
+      flex-shrink: 0;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--blue);
+      margin-top: 7px;
+    }
+
+    /* ─── DIVIDER ────────────────────────────────── */
+    .divider {
+      max-width: var(--max);
+      margin: 0 auto;
+      height: 1px;
+      background: var(--blue-pale);
+    }
+
+    /* ─── PROGRAMS ───────────────────────────────── */
+    .programs-bg {
+      background: var(--cream);
+    }
+    .programs-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .programs-header h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 2.9rem);
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+    .programs-header p {
+      font-size: 0.97rem;
+      color: var(--mist);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .prog-card {
+      background: var(--white);
+      border: 1px solid var(--blue-pale);
+      border-radius: 16px;
+      padding: 36px 30px;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .prog-card:hover {
+      box-shadow: 0 12px 40px rgba(127,168,201,0.18);
+      transform: translateY(-4px);
+    }
+    .prog-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--blue-wash);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .prog-icon svg {
+      width: 22px; height: 22px;
+      stroke: var(--blue-deep);
+      fill: none;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .prog-card h3 {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .prog-card p {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: var(--mist);
+      margin-bottom: 18px;
+    }
+    .prog-services {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .prog-services li {
+      font-size: 0.82rem;
+      color: var(--mist);
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .prog-services li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+    }
+
+    /* ─── IMPACT STRIP ───────────────────────────── */
+    .impact-strip {
+      background: var(--blue-deep);
+      padding: 70px 48px;
+    }
+    .impact-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      text-align: center;
+    }
+    .impact-inner .about-label {
+      color: var(--blue-pale);
+    }
+    .impact-inner h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.9rem, 3.2vw, 2.7rem);
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 14px;
+      line-height: 1.25;
+    }
+    .impact-inner > p {
+      font-size: 0.97rem;
+      color: var(--blue-pale);
+      max-width: 520px;
+      margin: 0 auto 52px;
+      line-height: 1.75;
+    }
+    .impact-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .stat-item {
+      padding: 32px 20px;
+      border-right: 1px solid rgba(201,220,234,0.2);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-item p {
+      font-size: 0.8rem;
+      color: var(--blue-pale);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 1.5;
+    }
+    .stat-icon {
+      margin: 0 auto 10px;
+      width: 36px; height: 36px;
+      opacity: 0.6;
+    }
+    .stat-icon svg {
+      width: 36px; height: 36px;
+      stroke: var(--blue-pale);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ─── SUPPORT / CTA ──────────────────────────── */
+    .support-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .support-left h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.2vw, 2.7rem);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 22px;
+    }
+    .support-left p {
+      font-size: 0.97rem;
+      line-height: 1.8;
+      color: var(--mist);
+      margin-bottom: 18px;
+    }
+    .support-left .btn { margin-top: 10px; }
+    .support-ways {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .way-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 22px 24px;
+      border: 1px solid var(--blue-pale);
+      border-radius: 12px;
+      transition: background 0.2s;
+    }
+    .way-card:hover { background: var(--blue-wash); }
+    .way-num {
+      flex-shrink: 0;
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--blue-pale);
+      line-height: 1;
+      margin-top: 2px;
+    }
+    .way-card h4 {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .way-card p {
+      font-size: 0.85rem;
+      color: var(--mist);
+      line-height: 1.6;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────── */
+    footer {
+      background: var(--ink);
+      padding: 60px 48px 40px;
+    }
+    .footer-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+    .footer-brand img {
+      width: 52px;
+      margin-bottom: 14px;
+      /* make white version visible on dark bg */
+      filter: brightness(0) invert(1) opacity(0.6);
+    }
+    .footer-brand p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.38);
+      line-height: 1.7;
+      max-width: 260px;
+    }
+    .footer-links h5 {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue-pale);
+      margin-bottom: 16px;
+    }
+    .footer-links ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-links li a {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.48);
+      transition: color 0.2s;
+    }
+    .footer-links li a:hover { color: var(--blue-pale); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.25);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* ─── SCROLL REVEAL ──────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .section { padding: 64px 24px; }
+      .about-grid,
+      .support-grid { grid-template-columns: 1fr; gap: 40px; }
+      .programs-grid { grid-template-columns: 1fr; }
+      .impact-stats { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(201,220,234,0.2); }
+      .stat-item:last-child { border-bottom: none; }
+      footer { padding: 48px 24px 32px; }
+      .footer-top { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">
+      <img src="Kuraz_Collective_V1.png" alt="Kuraz Collective logo" />
+      <div class="nav-wordmark">
+        Kuraz Collective
+        <span>Inc.</span>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#support">Support Us</a></li>
+      <li><a href="#support" class="nav-cta">Get Involved</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <img src="Kuraz_Collective_V1.png" alt="Kuraz Collective" class="hero-logo reveal" />
+    <p class="hero-eyebrow reveal">Citizenship · Connection · Civic Engagement</p>
+    <h1 class="reveal">
+      Every Senior Deserves<br />
+      the Opportunity to <em>Belong.</em>
+    </h1>
+    <p class="hero-sub reveal">
+      Helping elderly Ethiopian, Eritrean, and immigrant community members overcome
+      barriers to citizenship and participate fully in civic life.
+    </p>
+    <div class="hero-actions reveal">
+      <a href="#programs" class="btn btn-primary">Our Programs</a>
+      <a href="#support" class="btn btn-outline">Support a Senior</a>
+    </div>
+    <div class="scroll-hint reveal">
+      <span>Scroll</span>
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="4 7 9 12 14 7"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-left reveal">
+          <p class="about-label">Who We Are</p>
+          <h2>Empowering Seniors Through Knowledge and Community</h2>
+          <p>
+            For many older adults, the path to U.S. citizenship can feel overwhelming.
+            Language barriers, limited access to technology, transportation challenges,
+            complex requirements, and financial hardship often prevent seniors from
+            completing the process.
+          </p>
+          <p>
+            Through culturally responsive education, one-on-one support, peer navigation,
+            and community advocacy, Kuraz Collective helps elderly immigrants achieve
+            citizenship, strengthen their independence, and deepen their connection to
+            the communities they call home.
+          </p>
+          <div class="mission-card">
+            <h3>Our Mission</h3>
+            <p>
+              Kuraz Collective Inc. advances equity and opportunity by empowering elderly
+              immigrants with the tools, knowledge, and support needed to achieve
+              citizenship, access resources, and engage fully in civic and community life.
+            </p>
+          </div>
+        </div>
+
+        <div class="about-right reveal">
+          <p class="about-label">Why Citizenship Matters for Seniors</p>
+          <p style="font-size:0.97rem;line-height:1.8;color:var(--mist);margin-bottom:8px;">
+            Citizenship offers more than legal status. When seniors become citizens,
+            entire families and communities benefit.
+          </p>
+          <div class="why-list">
+            <div class="why-item"><div class="why-dot"></div><span>A stronger sense of belonging and security</span></div>
+            <div class="why-item"><div class="why-dot"></div><span>The right to vote and participate in democracy</span></div>
+            <div class="why-item"><div class="why-dot"></div><span>Greater access to benefits and services</span></div>
+            <div class="why-item"><div class="why-dot"></div><span>Opportunities to advocate for themselves and their families</span></div>
+            <div class="why-item"><div class="why-dot"></div><span>Increased confidence and community engagement</span></div>
+            <div class="why-item"><div class="why-dot"></div><span>A lasting legacy for future generations</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PROGRAMS -->
+  <section class="section programs-bg" id="programs">
+    <div class="section-inner">
+      <div class="programs-header reveal">
+        <p class="about-label">What We Do</p>
+        <h2>Our Programs</h2>
+        <p>
+          Comprehensive, culturally responsive support designed specifically
+          for elderly immigrant adults navigating the citizenship journey.
+        </p>
+      </div>
+
+      <div class="programs-grid">
+
+        <!-- Card 1 -->
+        <div class="prog-card reveal">
+          <div class="prog-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2L3 7l9 5 9-5-9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg>
+          </div>
+          <h3>Elderly Citizenship Attainment Project</h3>
+          <p>A comprehensive support program designed specifically for older immigrant adults pursuing naturalization.</p>
+          <ul class="prog-services">
+            <li>Citizenship test preparation classes</li>
+            <li>Naturalization interview preparation</li>
+            <li>One-on-one application assistance</li>
+            <li>Translation and interpretation support</li>
+            <li>Community citizenship clinics</li>
+            <li>Application fee assistance for eligible participants</li>
+          </ul>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="prog-card reveal">
+          <div class="prog-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/><path d="M16 11c1.7 0.4 3 1.9 3 3.7"/><path d="M8 11c-1.7 0.4-3 1.9-3 3.7"/></svg>
+          </div>
+          <h3>Senior Peer Navigator Program</h3>
+          <p>Trusted community leaders trained to guide fellow seniors through every step of the citizenship process.</p>
+          <ul class="prog-services">
+            <li>Understand eligibility requirements</li>
+            <li>Complete paperwork with confidence</li>
+            <li>Access community resources</li>
+            <li>Stay motivated throughout the process</li>
+            <li>Connect with culturally relevant support systems</li>
+          </ul>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="prog-card reveal">
+          <div class="prog-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 3h18v4H3z"/><path d="M3 10h18v4H3z"/><path d="M3 17h18v4H3z"/></svg>
+          </div>
+          <h3>Civic Participation for Seniors</h3>
+          <p>Citizenship is only the beginning. We help elderly immigrants learn how to exercise their voice in civic life.</p>
+          <ul class="prog-services">
+            <li>Vote and participate in elections</li>
+            <li>Engage with local government</li>
+            <li>Access public services</li>
+            <li>Advocate for issues affecting older adults</li>
+            <li>Build stronger community connections</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT STRIP -->
+  <section class="impact-strip">
+    <div class="impact-inner">
+      <p class="about-label">Our Impact</p>
+      <h2>Every Citizenship Achieved Means a Senior Whose Voice Can Now Be Fully Heard</h2>
+      <p>Through our work, elderly immigrants gain confidence, stronger social connections, and greater civic participation.</p>
+      <div class="impact-stats">
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <p>Increased confidence navigating complex systems</p>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <p>Stronger social connections and community belonging</p>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p>A lasting impact on families and communities</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUPPORT -->
+  <section class="section" id="support">
+    <div class="section-inner">
+      <div class="support-grid">
+        <div class="support-left reveal">
+          <p class="about-label">Get Involved</p>
+          <h2>Help Elder Immigrants Become Citizens</h2>
+          <p>
+            Every year, elderly immigrants face barriers that prevent them from achieving
+            citizenship and participating fully in their communities. Your support helps
+            remove those barriers.
+          </p>
+          <p>
+            When an elderly immigrant becomes a citizen, the impact extends far beyond
+            one individual. Families gain stability. Communities gain engaged residents.
+            Seniors gain confidence, security, and a stronger voice.
+          </p>
+          <a href="mailto:info@kurazcollective.org" class="btn btn-primary">Contact Us Today</a>
+        </div>
+
+        <div class="support-ways reveal">
+          <div class="way-card">
+            <div class="way-num">01</div>
+            <div>
+              <h4>Donate</h4>
+              <p>Fund citizenship classes, application fee assistance, and translation services for seniors who need support.</p>
+            </div>
+          </div>
+          <div class="way-card">
+            <div class="way-num">02</div>
+            <div>
+              <h4>Volunteer</h4>
+              <p>Share your skills as a navigator, tutor, or community outreach volunteer helping seniors through the process.</p>
+            </div>
+          </div>
+          <div class="way-card">
+            <div class="way-num">03</div>
+            <div>
+              <h4>Become a Community Partner</h4>
+              <p>Organizations and institutions can partner with us to expand access and reach more elderly immigrants.</p>
+            </div>
+          </div>
+          <div class="way-card">
+            <div class="way-num">04</div>
+            <div>
+              <h4>Sponsor a Citizenship Applicant</h4>
+              <p>Directly sponsor the fees and support costs for a senior on their journey to citizenship.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="Kuraz_Collective_V1.png" alt="Kuraz Collective" />
+          <p>Empowering elder immigrants through citizenship, connection, and civic engagement.</p>
+        </div>
+        <div class="footer-links">
+          <h5>Programs</h5>
+          <ul>
+            <li><a href="#programs">Citizenship Attainment Project</a></li>
+            <li><a href="#programs">Senior Peer Navigator Program</a></li>
+            <li><a href="#programs">Civic Participation</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h5>Get Involved</h5>
+          <ul>
+            <li><a href="#support">Donate</a></li>
+            <li><a href="#support">Volunteer</a></li>
+            <li><a href="#support">Community Partners</a></li>
+            <li><a href="#support">Sponsor a Citizen</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="mailto:info@kurazcollective.org">info@kurazcollective.org</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Kuraz Collective Inc. All rights reserved.</span>
+        <span>Empowering Seniors. Strengthening Communities.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCROLL REVEAL SCRIPT -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
