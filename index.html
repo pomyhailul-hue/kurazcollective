@@ -124,7 +124,12 @@
     .programs-header { text-align: center; margin-bottom: 60px; }
     .programs-header h2 { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 2.9rem); font-weight: 600; color: var(--ink); margin-bottom: 14px; }
     .programs-header p { font-size: 0.97rem; color: var(--mist); max-width: 520px; margin: 0 auto; line-height: 1.75; }
-    .programs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.programs-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 600px);
+  justify-content: center;
+  gap: 24px;
+}
     .prog-card { background: var(--white); border: 1px solid var(--blue-pale); border-radius: 16px; padding: 36px 30px; transition: box-shadow 0.25s, transform 0.25s; }
     .prog-card:hover { box-shadow: 0 12px 40px rgba(127,168,201,0.18); transform: translateY(-4px); }
     .prog-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--blue-wash); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
@@ -206,7 +211,7 @@
     </div>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
-      <li><a href="#programs">Programs</a></li>
+<li><a href="#programs">Our Project</a></li>
       <li><a href="#support">Support Us</a></li>
       <li><a href="#support" class="nav-cta">Get Involved</a></li>
     </ul>
@@ -225,7 +230,7 @@
       overcome barriers to citizenship and participate fully in civic life.
     </p>
     <div class="hero-actions reveal">
-      <a href="#programs" class="btn btn-primary">Our Programs</a>
+<a href="#programs" class="btn btn-primary">Our Project</a>
       <a href="#support" class="btn btn-outline">Support a Senior</a>
     </div>
     <div class="scroll-hint reveal">
@@ -271,23 +276,32 @@
   <div class="divider"></div>
 
   <!-- PROGRAMS -->
+    <!-- PROJECT -->
   <section class="section programs-bg" id="programs">
     <div class="section-inner">
       <div class="programs-header reveal">
         <p class="about-label">What We Do</p>
-        <h2>Our Programs</h2>
+        <h2>Our Project</h2>
         <p>
-          Comprehensive, culturally responsive support designed specifically
-          for elderly immigrant adults navigating the citizenship journey.
+          Culturally responsive support for elderly immigrant adults
+          navigating the citizenship journey.
         </p>
       </div>
+
       <div class="programs-grid">
         <div class="prog-card reveal">
           <div class="prog-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 2L3 7l9 5 9-5-9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2L3 7l9 5 9-5-9-5z"/>
+              <path d="M3 12l9 5 9-5"/>
+              <path d="M3 17l9 5 9-5"/>
+            </svg>
           </div>
           <h3>Elderly Citizenship Attainment Project</h3>
-          <p>A comprehensive support program designed specifically for older immigrant adults pursuing naturalization.</p>
+          <p>
+            A comprehensive support program designed specifically for
+            older immigrant adults pursuing naturalization.
+          </p>
           <ul class="prog-services">
             <li>Citizenship test preparation classes</li>
             <li>Naturalization interview preparation</li>
@@ -295,34 +309,6 @@
             <li>Translation and interpretation support</li>
             <li>Community citizenship clinics</li>
             <li>Application fee assistance for eligible participants</li>
-          </ul>
-        </div>
-        <div class="prog-card reveal">
-          <div class="prog-icon">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/><path d="M16 11c1.7 0.4 3 1.9 3 3.7"/><path d="M8 11c-1.7 0.4-3 1.9-3 3.7"/></svg>
-          </div>
-          <h3>Senior Peer Navigator Program</h3>
-          <p>Trusted community leaders trained to guide fellow seniors through every step of the citizenship process.</p>
-          <ul class="prog-services">
-            <li>Understand eligibility requirements</li>
-            <li>Complete paperwork with confidence</li>
-            <li>Access community resources</li>
-            <li>Stay motivated throughout the process</li>
-            <li>Connect with culturally relevant support systems</li>
-          </ul>
-        </div>
-        <div class="prog-card reveal">
-          <div class="prog-icon">
-            <svg viewBox="0 0 24 24"><path d="M3 3h18v4H3z"/><path d="M3 10h18v4H3z"/><path d="M3 17h18v4H3z"/></svg>
-          </div>
-          <h3>Civic Participation for Seniors</h3>
-          <p>Citizenship is only the beginning. We help elderly immigrants learn how to exercise their voice in civic life.</p>
-          <ul class="prog-services">
-            <li>Vote and participate in elections</li>
-            <li>Engage with local government</li>
-            <li>Access public services</li>
-            <li>Advocate for issues affecting older adults</li>
-            <li>Build stronger community connections</li>
           </ul>
         </div>
       </div>
